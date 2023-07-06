@@ -34,6 +34,29 @@ database.once("open", () => console.log('Connected to the database successfully.
 
 const app = express();
 
+// CORS Middleware
+app.use(cors());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Body parser middleware
+app.use(bodyParser.json());
+
+// Passport middleware
+app.use(session({
+    secret: db.secret,
+    saveUninitialized: true,
+    resave: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
+app.use('/users', users);
+app.use('/orders', orders);
+
 app.get('/', (req, res) => {
   res.send('Hello from app engine');
 });
