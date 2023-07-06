@@ -1,0 +1,45 @@
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
+const mongoose = require('mongoose');
+const db = require('./config/database');
+const session = require('express-session');
+
+// import routes for users and orders
+const users = require('./routes/users');
+const orders = require('./routes/orders');
+
+// Set port
+const PORT = process.env.PORT || 8080;
+
+// Set mongoose to use global Promise
+mongoose.Promise = global.Promise;
+
+// Connect to database using MongoURI
+mongoose.connect(
+  db.MongoURI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  } 
+).catch((err) => {
+  throw err;
+});
+const database = mongoose.connection;
+database.on("error", console.error.bind(console, "connection failed: "));
+database.once("open", () => console.log('Connected to the database successfully.'));
+
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello from app engine');
+});
+
+
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
+});

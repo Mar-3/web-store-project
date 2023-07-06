@@ -1,14 +1,24 @@
 {
   "name": "web-store-project",
   "version": "1.0.0",
-  "description": "A web store project for development skills: Full Stack course.",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "nodemon index"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Marko Jutila",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.3.2",
+    "passport": "^0.6.0",
+    "path": "^0.12.7",
+    "session": "^0.1.0"
   }
 }
