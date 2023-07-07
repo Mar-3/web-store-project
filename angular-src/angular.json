@@ -25,9 +25,10 @@
               "src/assets"
             ],
             "styles": [
+              "src/new-age-styles.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [ ]
           },
           "configurations": {
             "production": {

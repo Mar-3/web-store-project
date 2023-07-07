@@ -18,6 +18,8 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FlashMessagesService } from './services/flashmessages.service'
 import { authGuard } from './guards/auth.guard';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { OrderComponent } from './components/order/order.component';
 
 
 const appRoutes: Routes =  [
@@ -25,7 +27,10 @@ const appRoutes: Routes =  [
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate: [authGuard]},
-  {path:'profile', component: ProfileComponent, canActivate: [authGuard]}
+  {path:'profile', component: ProfileComponent, canActivate: [authGuard]},
+  {path:'order', component: OrderComponent, canActivate: [authGuard]},
+  {path:'store', component: StoreComponent},
+  {path:'shoppingcart', component: ShoppingcartComponent}
 ]
 
 
@@ -38,7 +43,9 @@ const appRoutes: Routes =  [
     HomeComponent,
     ProfileComponent,
     DashboardComponent,
-    StoreComponent
+    StoreComponent,
+    ShoppingcartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
