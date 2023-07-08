@@ -1,0 +1,23 @@
+.product-div {
+  border-width: 2px;
+  border-color: grey;
+  border-style: solid;
+  background-color:azure;
+  width: auto;
+  height: auto;
+  flex-basis: auto;
+}
+.product-div img {
+  max-width: 400px;
+}
+.flex-container {
+  justify-content: flex-start;
+  align-content: space-evenly;
+  align-items: stretch;
+  flex-wrap: wrap;
+  display: flex;
+  flex-grow: 4;
+  flex-shrink: 1;
+  row-gap: 4rem;
+  column-gap: 1rem;
+}

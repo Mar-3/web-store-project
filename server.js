@@ -10,6 +10,7 @@ const session = require('express-session');
 // import routes for users and orders
 const users = require('./routes/users');
 const orders = require('./routes/orders');
+const products = require('./routes/products');
 
 // Set port
 const PORT = process.env.PORT || 8080;
@@ -56,11 +57,11 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 app.use('/orders', orders);
+app.use('/products', products);
 
-app.get('/', (req, res) => {
-  res.send('Hello from app engine');
-});
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+})
 
 
 app.listen(PORT, () => {

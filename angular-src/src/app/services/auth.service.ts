@@ -14,7 +14,7 @@ export class AuthService {
   registerUser(user:any) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<any>('http://localhost:8080/users/register',
+    return this.http.post<any>('https://ultra-ridge-392020.lm.r.appspot.com/users/register',
     user,
     {headers: headers,
     observe: 'response'});
@@ -23,7 +23,7 @@ export class AuthService {
   authenticateUser(user:any) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<any>('http://localhost:8080/users/authenticate',
+    return this.http.post<any>('https://ultra-ridge-392020.lm.r.appspot.com/users/authenticate',
     user,
     {headers: headers,
     observe: 'response'});
@@ -35,7 +35,7 @@ export class AuthService {
         'Content-Type': 'application/json',
         'Authorization': this.authToken
     });
-    return this.http.get<any>('http://localhost:8080/users/profile',
+    return this.http.get<any>('https://ultra-ridge-392020.lm.r.appspot.com/users/profile',
     {headers: headers,
     observe: 'response'});
   }

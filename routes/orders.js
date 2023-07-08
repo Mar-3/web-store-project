@@ -20,7 +20,7 @@ router.post('/neworder', async (req, res) => {
     message: "New order sent."
   }))
   .catch(err => {
-    req.json({
+    res.json({
       success: false,
       message: "Error in sending a new order."
     });
