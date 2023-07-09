@@ -2,16 +2,25 @@
   <h5>Your shopping cart</h5>
   <div class="container-flex">
     <div>
-      <table>
-        <tr *ngFor="let product of cartJson">
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.quantity }}</td>
-        </tr>
-      </table>
+      <div class="container-form">
+        <div>
+          <table class="shoppingcart">
+            <tr>
+              <th>Product name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
+            <tr *ngFor="let product of cartJson">
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.quantity }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-  <h5>Total: {{ totalPrice.toFixed() }}€</h5>
-  <button class="btn btn-primary rounded-pill" [routerLink]="['/order']">Order</button>
+  <h5>Total: {{ totalPrice.toFixed(2) }}€</h5>
+  <button class="btn btn-primary rounded-pill"
+  [routerLink]="['/order']">Order</button>
 
 </div>

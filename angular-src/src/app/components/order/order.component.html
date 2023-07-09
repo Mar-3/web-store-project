@@ -1,12 +1,31 @@
 <h2>Order:</h2>
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-  <h4></h4>
-  <label for="Address">Address:</label>
-  <input name="Address" ngModel required #address="ngModel"><br>
-  <label for="City">City:</label>
-  <input name="City" ngModel required #city="ngModel"><br>
-  <label for="postalcode">Postal Code:</label>
-  <input name="postalcode" ngModel required #city="ngModel"><br>
+  <br>
+  <label for="Address">Address:</label><br>
+  <input name="Address" ngModel required #address="ngModel"><br><br>
+  <label for="City">City:</label><br>
+  <input name="City" ngModel required #city="ngModel"><br><br>
+  <label for="postalcode">Postal Code:</label><br>
+  <input name="postalcode" ngModel required #postalcode="ngModel"><br><br><br>
+  <div>
+    <h5>Your shopping cart</h5>
+    <div class="container-form">
+      <div>
+        <table class="shoppingcart">
+          <tr>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+          <tr *ngFor="let product of cartJson">
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <h5>Total: {{ totalPrice.toFixed(2) }}€</h5>
+  </div>
   <button>Order</button>
-
 </form>

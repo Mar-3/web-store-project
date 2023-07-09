@@ -12,10 +12,12 @@
   margin-right: 10px;
   flex-wrap: wrap;
   justify-content: flex-end;
+  z-index: 10;
 }
 
 .flashmsg-container {
  position: fixed; 
+ z-index: 10;
  top: 150px;
  left:0;
  right:0

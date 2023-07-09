@@ -13,3 +13,21 @@ body::before {
   content: '';
   height: 60px;
 }
+
+.shoppingcart {
+  padding: 30px;
+  width: 70vw;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  text-align: left;
+}
+.shoppingcart th {
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  padding: 5px;
+}
+.shoppingcart td {
+  padding: 5px;
+}

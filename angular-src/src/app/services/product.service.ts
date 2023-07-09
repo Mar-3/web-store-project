@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FlashMessagesService } from './flashmessages.service';
+import { ObjectExpression } from 'mongoose';
+import { AuthService } from './auth.service';
 
 class Product {
   _id:string | undefined;
@@ -19,7 +21,9 @@ export class ProductService {
 
   constructor(
     private http:HttpClient,
-    private flashMessageService:FlashMessagesService) { }
+    private flashMessageService:FlashMessagesService,
+    private authService:AuthService) { }
+    
 
   getProductsStorage() {
     const productsObject = JSON.parse(localStorage.getItem('products') || '{}');
@@ -72,4 +76,45 @@ export class ProductService {
     console.log(cartJson);
     }
     
+    getTotalPrice() {
+      let totalPrice:number = 0 ;
+      const cartJson = this.getCartStorage();
+      cartJson.forEach( (element:any) => {
+        totalPrice += element.price*element.quantity;
+      });
+      return totalPrice;
+    }
+
+
+    newOrder(address:any) {
+      this.authService.loadToken();
+      const userId = 
+        JSON.parse(localStorage.getItem('user') || '{}').id;
+      const now = Date.now();
+      let products:any = [];
+      this.getCartStorage()
+      .forEach(item => {
+        products.push({
+          'id':item._id,
+          'quantity':item.quantity
+        });
+        });
+      const newOrder = {
+        'products': JSON.stringify(products),
+        'address': JSON.stringify(address),
+        'userId':userId,
+        'date':now.toString()
+      }
+      
+      console.log(newOrder);
+      let headers = new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': this.authService.authToken,
+      });
+      return this.http.post<any>(
+        'https://ultra-ridge-392020.lm.r.appspot.com/orders/new',
+        newOrder, 
+        {observe: 'response',
+        headers:headers},);
+    } 
   }

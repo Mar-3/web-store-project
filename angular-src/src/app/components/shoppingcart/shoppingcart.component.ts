@@ -18,9 +18,7 @@ export class ShoppingcartComponent {
 
   ngOnInit(){
     this.cartJson = this.productService.getCartStorage();
-    this.cartJson?.forEach((element:any) =>
-    {this.totalPrice+=Number.parseFloat(element.price);(this.totalPrice)})
-    
+    this.totalPrice = this.productService.getTotalPrice();
   }
 
   updateAmount(id:string, quantity:number) {

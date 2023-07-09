@@ -17,6 +17,8 @@ export class StoreComponent {
   
   products:any = placeholders;
 
+  
+
   constructor(
     private productService:ProductService,
     private router:Router) {}
