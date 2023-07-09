@@ -20,6 +20,7 @@ import { FlashMessagesService } from './services/flashmessages.service'
 import { authGuard } from './guards/auth.guard';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { OrderComponent } from './components/order/order.component';
+import { FlashmessageComponent } from './components/flashmessage/flashmessage.component';
 
 
 const appRoutes: Routes =  [
@@ -45,7 +46,8 @@ const appRoutes: Routes =  [
     DashboardComponent,
     StoreComponent,
     ShoppingcartComponent,
-    OrderComponent
+    OrderComponent,
+    FlashmessageComponent
   ],
   imports: [
     BrowserModule,

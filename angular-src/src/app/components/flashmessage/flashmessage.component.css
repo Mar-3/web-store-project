@@ -1,0 +1,57 @@
+.flashmsg {
+  border-radius: 0.3px;
+  border-style: solid;
+  opacity: 0.7;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  align-items: end;
+  position: fixed;
+  margin-right: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.flashmsg-container {
+ position: fixed; 
+ top: 150px;
+ left:0;
+ right:0
+}
+.flashmsg-btn {
+  background-color: rgba(0, 0, 0, 0);
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+.flashmsg h5 {
+  font-size: medium;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.flashmsg-success {
+  margin-left: 60vw;
+  position: relative;
+  background-color: yellowgreen;
+  border-color: greenyellow;
+  color: rgb(0, 0 , 0);
+}
+
+.flashmsg-warning {
+  margin-left: 60vw;
+  position: relative;
+  background-color: orange;
+  border-color: yellow;
+  color: rgba(0, 0, 0);
+}
+
+.flashmsg-error {
+  margin-left: 60vw;
+  position: relative;
+  background-color: rgb(255, 114, 62);
+  border-color: rgb(241, 67, 67);
+  color: rgb(0, 0, 0);
+}

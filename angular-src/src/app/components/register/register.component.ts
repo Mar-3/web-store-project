@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ValidateService } from 'src/app/services/validate.service';
+import { FlashMessagesService } from 'src/app/services/flashmessages.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -20,7 +21,8 @@ export class RegisterComponent {
   constructor(
     private validateService: ValidateService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private flashMessageService: FlashMessagesService
   ) {}
 
   onRegisterSubmit() {
@@ -32,12 +34,12 @@ export class RegisterComponent {
     }
     // Check require fields
     if(!this.validateService.validateRegister(user)) {
-      console.log('Please give all fields');
+      this.flashMessageService.newMessage('Please give all fields','warning');
       return false;
     }
 
     if(!this.validateService.validateEmail(user.email.valueOf())) {
-      console.log('Please give proper email');
+      this.flashMessageService.newMessage('Please give proper email', 'warning');
       return false;
     }
 
@@ -45,10 +47,10 @@ export class RegisterComponent {
     this.authService.registerUser(user).subscribe(data => {
       console.log(data.body);
       if(data.body['success']) {
-        console.log('You are now registered and can log in.')
+        this.flashMessageService.newMessage(data.body['message'], 'success');
         this.router.navigate(['/login']);
       } else {
-        console.log('error in registering user.');
+        this.flashMessageService.newMessage(data.body['message'], 'error');
         this.router.navigate(['/register']);
       }
     });

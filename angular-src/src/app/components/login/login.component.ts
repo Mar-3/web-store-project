@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { FlashMessagesService } from 'src/app/services/flashmessages.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
 
   constructor(
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private flashMessagesService:FlashMessagesService
     ) { }
 
   onLoginSubmit(){
@@ -25,13 +27,16 @@ export class LoginComponent {
     }
 
     this.authService.authenticateUser(user).subscribe(data => {
-      console.log('authenticateUser data:', data)
       if(data.body['success']) {
         this.authService.storeUserData(data.body['token'], data.body['user']);
+        this.flashMessagesService.newMessage('Successfully logged in!', 'success');
         this.router.navigate(['/dashboard']);
 
       } else {
-        console.log(data.body['msg']);
+        console.log(data);
+        console.log(data.body['message']);
+        this.flashMessagesService.newMessage(data.body['message'], 'error');
+
         this.router.navigate(['/login']);
       }
     })

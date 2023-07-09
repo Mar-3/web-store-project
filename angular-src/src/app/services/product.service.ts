@@ -1,30 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { FlashMessagesService } from './flashmessages.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private flashMessageService:FlashMessagesService) { }
 
-  checkProducts() {
-    if (localStorage.getItem('products') == null) {
-      const observable:Observable<any> = this.getProducts();
-      console.log(observable);
-      observable.subscribe((products: any) => {localStorage.setItem('products', JSON.stringify(products.body))});
-    }
-    return JSON.parse(localStorage.getItem('products') || '{}');
+  getProductsStorage() {
+    const productsObject = JSON.parse(localStorage.getItem('products') || '{}');
+    return productsObject;
   }
 
   getProducts() {
-    let headers = new HttpHeaders({
-      'Content-type': 'application/json'
-    });
     return this.http.get<any>(
-      'http://localhost:8080/products/all',
-      { headers: headers,
-        observe: 'response'});
+      'https://ultra-ridge-392020.lm.r.appspot.com/products/all',
+      {observe: 'response'});
   }
-}
+
+  addToCart(id:string) {
+    const productDb = this.getProductsStorage();
+    const cartRaw = localStorage.getItem('cart');
+    let cartJson:Array<Object> = JSON.parse(cartRaw || '[]');
+    const newProduct:any = productDb.find((item:any) => (item._id===id));
+    cartJson.push(newProduct);
+    localStorage.setItem('cart', JSON.stringify(cartJson));
+    this.flashMessageService
+    .newMessage(
+      'Product '.concat(newProduct.name,' has been added to your cart!'),'success')
+    console.log(cartJson);
+    }
+
+  }

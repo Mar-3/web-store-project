@@ -4,3 +4,12 @@
   margin-left: 50px;
   margin-right: 50px;
 }
+nav {
+  position: fixed-top;
+  top: 0;
+}
+body::before {
+  display: block;
+  content: '';
+  height: 60px;
+}

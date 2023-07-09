@@ -1,8 +1,10 @@
 <div class="flex-container">
-  <div class="product-div" [routerLink]="['/products/{{ product.id }}']" *ngFor="let product of products">
+  <div class="product-div"
+  *ngFor="let product of products; index as i">
     <img clas="img-product" src="{{ product.img }}"><br>
-    <h4>{{ product.name }}</h4><br>
+    <h4 (click)="showProduct(product._id)">{{ product.name }}</h4><br>
     <p> {{ product.price }}€ </p>
-    <button class="btn btn-primary rounded-pill" >Add to shopping cart</button>
+    <button class="btn btn-primary rounded-pill" 
+    (click)="addToCart(product._id)">Add to shopping cart</button>
   </div>
 </div>

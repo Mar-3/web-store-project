@@ -5,22 +5,17 @@ const bcrypt = require('bcryptjs');
 // User Schema
 const UserSchema = mongoose.Schema({
     name: {
+        type: String
+    },
+    email: {
         type: String,
         required: true
     },
-    category: {
+    username: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: String,
-        required: true
-    },
-    img: {
+    password: {
         type: String,
         required: true
     }
@@ -39,6 +34,7 @@ module.exports.getUserById = async function(id, callback) {
 module.exports.getUserByUsername = async function(username, callback) {
     const query = {username: username};
     const results = await User.findOne(query).exec();
+    console.log(results);
     callback(null, results);
 }
 
@@ -53,7 +49,7 @@ bcrypt.genSalt(10, (err, salt) => {
     });
 };
 
-// Compare given password to the hashed password in the database.
+// Compare given password to the hashed password in the database
 module.exports.comparePassword = function(candidatePassword, hash, callback) {
     bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
         if(err) throw err;
