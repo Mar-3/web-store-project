@@ -1,6 +1,6 @@
 
 <div class="flashmsg-container">
-  <span class="flashmsg-success flashmsg" *ngFor="let msg of flashMessages; index as i">
-    <h5> {{msg.msg}} </h5> <button class="flashmsg-btn">X</button>
-  </span>
+  <div class="{{ msg.color }} flashmsg" *ngFor="let msg of flashMessages">
+    <h5> {{msg.msg}} </h5>
+  </div>
 </div>

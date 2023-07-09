@@ -19,7 +19,7 @@ export class FlashmessageComponent {
   // timer to delete it.
   add(newMessage:any) {
     this.flashMessages.push(newMessage);
-    timer(5000).subscribe(
+    timer(4000).subscribe(
       () =>  this.flashMessages.shift()
       );
   }

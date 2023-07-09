@@ -17,7 +17,7 @@ export class NavbarComponent {
 
     onLogoutClick() {
       this.authService.logout();
-      this.flashMessageService.newMessage('Youa re now logged out', 'warning');
+      this.flashMessageService.newMessage('You are now logged out', 'warning');
       this.router.navigate(['']);
     }
 

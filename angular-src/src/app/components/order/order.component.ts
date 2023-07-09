@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent {
-
+  onSubmit(form: NgForm){
+    console.log(form);
+  }
 }

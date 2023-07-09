@@ -20,14 +20,8 @@
  left:0;
  right:0
 }
-.flashmsg-btn {
-  background-color: rgba(0, 0, 0, 0);
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-}
+
 .flashmsg h5 {
-  font-size: medium;
   margin-left: 30px;
   margin-right: 30px;
 }

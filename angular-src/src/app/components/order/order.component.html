@@ -1,1 +1,12 @@
-<p>order works!</p>
+<h2>Order:</h2>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <h4></h4>
+  <label for="Address">Address:</label>
+  <input name="Address" ngModel required #address="ngModel"><br>
+  <label for="City">City:</label>
+  <input name="City" ngModel required #city="ngModel"><br>
+  <label for="postalcode">Postal Code:</label>
+  <input name="postalcode" ngModel required #city="ngModel"><br>
+  <button>Order</button>
+
+</form>

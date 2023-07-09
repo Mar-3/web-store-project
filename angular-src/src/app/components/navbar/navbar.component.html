@@ -16,7 +16,7 @@
               <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link me-lg-3" [routerLink]="['/profile']">Profile</a></li>
               <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link me-lg-3" (click) ="onLogoutClick()">Log Out</a></li>
           </ul>
-          <button class="btn btn-primary btn-round px-3">
+          <button class="btn btn-primary btn-round px-3" [routerLink]="['/shoppingcart']">
                   <span>
                   <img src="assets/img/shpping_cart.png" width="40px" height="40px">
                   </span>

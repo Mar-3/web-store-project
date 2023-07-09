@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { compileDeclareClassMetadata } from '@angular/compiler';
 
 const placeholders = JSON.parse(
   '[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]'
@@ -35,7 +36,10 @@ export class StoreComponent {
     };
 
     addToCart(id:string) {
-      this.productService.addToCart(id);
+      const quantity = 
+      Number.parseInt(document.getElementById(id)?.getAttribute('value') as string);
+     
+      this.productService.addToCart(id, quantity as number);
     }
     showProduct(id:string) {
       console.log(id);
