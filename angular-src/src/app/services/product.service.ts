@@ -26,8 +26,17 @@ export class ProductService {
     
 
   getProductsStorage() {
-    const productsObject = JSON.parse(localStorage.getItem('products') || '{}');
-    return productsObject;
+    if (localStorage.getItem('products') === null) {
+      this.getProducts()
+      .subscribe(
+        (data) => {
+          localStorage.setItem('products',JSON.stringify(data.body));
+          return JSON.parse(localStorage.getItem('products') || '{}');;
+        })
+      }
+    else {       
+      return JSON.parse(localStorage.getItem('products') || '{}');;
+    }
   }
 
   getProducts() {
@@ -44,6 +53,32 @@ export class ProductService {
   saveCartStorage(cartJson:Object) {
     localStorage.setItem('cart', JSON.stringify(cartJson));
   }
+
+  updateQuantity(id:string, quantity:number) {
+    const cartJson = this.getCartStorage();
+    console.log('new quantity',quantity)
+    // remove if quantity 0 or negative, else update amount
+    if (quantity < 1) {
+        cartJson.splice(
+        cartJson.findIndex((item:Product) => {
+          return(item._id == id)
+        }), 1
+      )
+    } else {
+      cartJson.at(
+        cartJson.findIndex((item:Product) => {
+          return(item._id == id)
+        })
+      )!.quantity = quantity;
+    }
+    localStorage.setItem('cart', JSON.stringify(cartJson));
+    console.log('Updated quantity');
+  }
+
+  emptyCart() {
+    localStorage.removeItem('cart');
+  }
+
 
   addToCart(id:string, quantity: number) {
     // Get database of all products and find the new item
@@ -68,7 +103,9 @@ export class ProductService {
       const newQuantity = +cartJson.at(cartIndex)!
       .quantity! + +quantity ;
       cartJson.at(cartIndex)!.quantity! = newQuantity;
+      console.log('newQuantity ', newQuantity)
     }
+    // Save new updated cart to localstorage
     localStorage.setItem('cart', JSON.stringify(cartJson));
     this.flashMessageService
     .newMessage(
@@ -100,19 +137,19 @@ export class ProductService {
         });
         });
       const newOrder = {
-        'products': JSON.stringify(products),
-        'address': JSON.stringify(address),
+        'products': products,
+        'address': address,
         'userId':userId,
         'date':now.toString()
       }
-      
+
       console.log(newOrder);
       let headers = new HttpHeaders({
         'Content-type': 'application/json',
         'Authorization': this.authService.authToken,
       });
       return this.http.post<any>(
-        'https://ultra-ridge-392020.lm.r.appspot.com/orders/new',
+        'http://localhost:8080/orders/new',
         newOrder, 
         {observe: 'response',
         headers:headers},);

@@ -1,0 +1,12 @@
+.orderBox {
+  background-color: whitesmoke;
+  margin-top: 5vh;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.orderBox * {
+  margin: 10px;
+  text-align: start;
+}

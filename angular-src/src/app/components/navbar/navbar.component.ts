@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlashMessagesService } from 'src/app/services/flashmessages.service';
@@ -14,6 +14,7 @@ export class NavbarComponent {
     private router:Router,
     private flashMessageService:FlashMessagesService
     ) { }
+    
 
     onLogoutClick() {
       this.authService.logout();

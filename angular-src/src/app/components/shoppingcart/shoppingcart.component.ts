@@ -21,11 +21,18 @@ export class ShoppingcartComponent {
     this.totalPrice = this.productService.getTotalPrice();
   }
 
-  updateAmount(id:string, quantity:number) {
-    for (let i = 0; i < quantity; i++) {
-    }
+  removeProduct(id:string) {
+    this.productService.updateQuantity(id, 0);
+    
+  };
+  updateQuantity(id:string) {
+    console.log(id);
+    console.log('updateQuantity');
+    const quantity:number =
+      Number.parseInt((<HTMLInputElement>document.getElementById('quantity'+id)).value);
+    this.productService.updateQuantity(id, quantity);
+    this.cartJson = this.productService.getCartStorage();
+    this.totalPrice = this.productService.getTotalPrice();
   }
-
-
 
 }

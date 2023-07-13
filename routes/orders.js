@@ -13,21 +13,32 @@ router.post('/new',
   passport.authenticate('jwt',
   {session:false}),
   async (req, res, next) => {
-    console.log(req)
-    console.log(req.body)
-    console.log(req.products)
     let now = Date.now();
     let newOrder = Order({
         products: req.body.products,
         address: req.body.address,
         date: now,
-        userId: req.body._userId
+        userId: req.body.userId
     });
+    console.log('req body ', req.body
+    )
     console.log('orders.js',newOrder);
     await Order.addOrder(newOrder)
     .then(res.json({ success: true, message: "New order sent successfully"}))
     .catch(err => res.json({ success: false, message: "Error in registering a new order: "+err}));
   }
 )
+
+// Get orders from user
+router.post('/getOrders',
+  passport.authenticate('jwt', {session:false}),
+    async (req, res, next) => {
+      console.log('request body: ',req.body);
+      await Order.getOrders(req.body.userId, (err, orders) => {
+        res.json({
+          orders:orders
+        })
+      })
+    })
 
 module.exports = router;

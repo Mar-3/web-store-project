@@ -24,24 +24,14 @@ export class StoreComponent {
     private router:Router) {}
 
   ngOnInit() {
-    if (localStorage.getItem('products') === null) {
-      this.productService.getProducts()
-      .subscribe(
-        (data) => {
-          localStorage.setItem('products',JSON.stringify(data.body));
-          this.products = this.productService.getProductsStorage();
-        })
-
-    } else {
       this.products = this.productService.getProductsStorage();
     }
-    };
 
     addToCart(id:string) {
       const quantity = 
-      Number.parseInt(document.getElementById(id)?.getAttribute('value') as string);
-     
-      this.productService.addToCart(id, quantity as number);
+      Number.parseInt((<HTMLInputElement>document.getElementById(id)).value);
+      console.log(quantity);
+      this.productService.addToCart(id, quantity);
     }
     showProduct(id:string) {
       console.log(id);

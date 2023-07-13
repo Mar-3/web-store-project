@@ -1,7 +1,27 @@
-<div *ngIf="user">
   <h2 class="page-header">{{user.name}}</h2>
   <ul class="list-group">
       <li class="list-group-item">Username: {{user.username}}</li>
       <li class="list-group-item">Email: {{user.email}}</li>
   </ul>
+  <br>
+  <h3>Your past orders:</h3>
+  <div class="orderBox" *ngFor="let order of orders">
+    <h5>Order info:</h5>
+
+    <ul class="list-group">
+        <li class="list-group-item">Order id: {{ order._id }}</li>
+        <li class="list-group-item">Date and time: {{ order.date }}</li>
+        <li class="list-group-item">Address: {{ order.address.city }}<br>
+          {{ order.address.Address }}<br>
+          {{ order.address.postalcode}} {{ order.address.City }}</li>
+          <h5>Ordered Products</h5>
+          <div *ngFor="let product of order.products">
+              <li class="list-group-item">
+                <h6>{{ product.name }}</h6> <p>Quantity: {{ product.quantity }}</p>
+                <h6>{{ product.price }}€</h6>
+                <h6>Total: {{ product.price * product.quantity}}€</h6>
+              </li>
+          </div>
+          <h5>Grand total: {{ order.totalPrice }}</h5>              
+      </ul>
 </div>

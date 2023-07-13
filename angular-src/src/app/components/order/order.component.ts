@@ -27,6 +27,7 @@ export class OrderComponent {
         console.log(data);
         if(data.body['success']) {
           this.flashMessageService.newMessage("Order sent successfully!", 'success');
+          this.productService.emptyCart;
         } else {
           this.flashMessageService.newMessage(
             "Error sending the order",

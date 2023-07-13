@@ -33,7 +33,8 @@ module.exports.getUserById = async function(id, callback) {
 // Method for getting a user from database using username
 module.exports.getUserByUsername = async function(username, callback) {
     const query = {username: username};
-    const results = await User.findOne(query).exec();
+    const results = await User.findOne(query).exec()
+    .catch((e) => {throw e})
     console.log(results);
     callback(null, results);
 }

@@ -4,20 +4,20 @@ const mongoose = require('mongoose');
 // Order Schema
 const OrderSchema = mongoose.Schema({
     products: {
-      type: Object,
-      require: true
+      type: Array,
+      required: true
     },
     address: {
       type: Object,
-      require: true
+      required: true
     },
     date: {
       type: Date,
-      require: true
+      required: true
     },
     userId: {
       type: String,
-      require: true
+      required: true
     }
 }, { collection: 'orders' });
 
@@ -29,4 +29,17 @@ module.exports.addOrder = async function(newOrder) {
   console.log('Order.addOrder()',newOrder);
   await newOrder.save()
   .catch(err => console.log(err));
+};
+
+// Get orders from a user
+module.exports.getOrders = async function(userId, callback) {
+  console.log('Order.js" ', userId);
+  const query = {userId : userId};
+  const results = await Order.find(query).exec()
+  .catch((e) => 
+  {
+    callback(err, null);
+    throw e;  
+  });
+  callback(null, results);
 }

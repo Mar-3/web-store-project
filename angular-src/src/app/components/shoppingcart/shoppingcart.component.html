@@ -13,7 +13,7 @@
             <tr *ngFor="let product of cartJson">
               <td>{{ product.name }}</td>
               <td>{{ product.price }}</td>
-              <td>{{ product.quantity }}</td>
+              <input (change)="updateQuantity(product._id)" id="quantity{{product._id}}" type="number" value="{{ product.quantity }}">
             </tr>
           </table>
         </div>

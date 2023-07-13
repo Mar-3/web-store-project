@@ -29,14 +29,13 @@ export class LoginComponent {
     this.authService.authenticateUser(user).subscribe(data => {
       if(data.body['success']) {
         this.authService.storeUserData(data.body['token'], data.body['user']);
-        this.flashMessagesService.newMessage('Successfully logged in!', 'success');
-        this.router.navigate(['/dashboard']);
+        this.flashMessagesService.newMessage(data.body['message'], 'success');
+        this.router.navigate(['/profile']);
 
       } else {
         console.log(data);
         console.log(data.body['message']);
         this.flashMessagesService.newMessage(data.body['message'], 'error');
-
         this.router.navigate(['/login']);
       }
     })

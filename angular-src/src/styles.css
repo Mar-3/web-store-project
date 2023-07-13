@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.router-outlet-content::before {
+  display: block;
+  content: '';
+  height: 60px;
+}
+
 .router-outlet-content {
   margin-top: 150px;
   margin-left: 50px;

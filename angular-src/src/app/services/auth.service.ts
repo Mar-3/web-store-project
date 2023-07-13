@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+const backendUrl = 'http://localhost:8080';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class AuthService {
   registerUser(user:any) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<any>('https://ultra-ridge-392020.lm.r.appspot.com/users/register',
+    return this.http.post<any>(backendUrl+'/users/register',
     user,
     {headers: headers,
     observe: 'response'});
@@ -23,19 +25,24 @@ export class AuthService {
   authenticateUser(user:any) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post<any>('https://ultra-ridge-392020.lm.r.appspot.com/users/authenticate',
+    return this.http.post<any>(backendUrl+'/users/authenticate',
     user,
     {headers: headers,
     observe: 'response'});
   }
 
   getProfile() {
-    this.loadToken();
-    let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.authToken
-    });
-    return this.http.get<any>('https://ultra-ridge-392020.lm.r.appspot.com/users/profile',
+    return JSON.parse(localStorage.getItem('user') || '');
+  }
+
+  getUserOrders() {
+    let userId = { userId:this.getProfile().id}
+    console.log(userId)
+    let headers = new HttpHeaders(
+      {'Content-Type': 'application/json',
+      'Authorization': this.authToken});
+    return this.http.post<any>(backendUrl+'/orders/getOrders',
+    userId,
     {headers: headers,
     observe: 'response'});
   }
@@ -58,7 +65,7 @@ export class AuthService {
     const isTokenExpired = helper.isTokenExpired(this.authToken); 
     console.log('isTokenExpired:', isTokenExpired)
     return !isTokenExpired;
-}
+  }
 
   logout() {
     this.authToken = null;

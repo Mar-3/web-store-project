@@ -43,6 +43,7 @@ router.post('/authenticate', (req, res, next) => {
                 res.json({
                     success: true,
                     token: 'JWT '+token,
+                    message: 'Successfully logged in',
                     user: {
                         id: user._id,
                         name: user.name,
@@ -51,21 +52,11 @@ router.post('/authenticate', (req, res, next) => {
                     }
                 })
             } else {
-                return res.json({success: false, msg: 'Wrong password'})
+                return res.json({success: false, message: 'Wrong password'})
             }
         });
     });
 
 });
 
-// Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    res.json({
-        user: {
-            'username': res.username,
-            'email': res.email,
-            'name': res.name
-        }
-    });
-});
 module.exports = router;
