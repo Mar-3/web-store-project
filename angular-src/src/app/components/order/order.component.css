@@ -1,5 +1,14 @@
+form {
+  justify-content: center;
+  padding: 5vw;
+}
+
+table {
+  padding: 5vw;
+  width: 100%;
+}
+
 .container-form {
-  width: 60vw;
   margin-top: 5vh;
   margin-bottom: 5vh;
   justify-content: center;

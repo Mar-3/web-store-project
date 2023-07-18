@@ -1,6 +1,6 @@
 <div class="flex-container">
   <div class="product-box"
-  *ngFor="let product of products; index as i">
+  *ngFor="let product of products">
     <img clas="img-product" src="{{ product.img }}"><br>
     <h4 (click)="showProduct(product._id)">{{ product.name }}</h4><br>
     <p> {{ product.price }}€ </p>

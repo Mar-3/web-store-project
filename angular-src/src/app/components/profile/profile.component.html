@@ -1,3 +1,4 @@
+ <div class="profile"> 
   <h2 class="page-header">{{user.name}}</h2>
   <ul class="list-group">
       <li class="list-group-item">Username: {{user.username}}</li>
@@ -19,9 +20,10 @@
               <li class="list-group-item">
                 <h6>{{ product.name }}</h6> <p>Quantity: {{ product.quantity }}</p>
                 <h6>{{ product.price }}€</h6>
-                <h6>Total: {{ product.price * product.quantity}}€</h6>
+                <h6>Total: {{ (product.price * product.quantity).toFixed(2)}}€</h6>
               </li>
           </div>
-          <h5>Grand total: {{ order.totalPrice }}</h5>              
+          <h5>Grand total: {{ order.totalPrice.toFixed(2) }}€</h5>              
       </ul>
+</div>
 </div>

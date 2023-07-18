@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const backendUrl = 'http://localhost:8080';
+const backendUrl = 'https://ultra-ridge-392020.lm.r.appspot.com';
+//const backendUrl = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,6 @@ export class AuthService {
 
   getUserOrders() {
     let userId = { userId:this.getProfile().id}
-    console.log(userId)
     let headers = new HttpHeaders(
       {'Content-Type': 'application/json',
       'Authorization': this.authToken});

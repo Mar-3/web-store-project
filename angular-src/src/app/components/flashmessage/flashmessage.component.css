@@ -7,12 +7,12 @@
   display: flex;
   padding-top: 30px;
   padding-bottom: 30px;
-  align-items: end;
-  position: fixed;
+  align-items: flex-end;
+  position: relative;
   margin-right: 10px;
   flex-wrap: wrap;
   justify-content: flex-end;
-  z-index: 10;
+  z-index: 250;
 }
 
 .flashmsg-container {

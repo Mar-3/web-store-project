@@ -1,12 +1,17 @@
 .orderBox {
   background-color: whitesmoke;
-  margin-top: 5vh;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-}
+  padding:2rem;
+  margin: 1rem;
 
+}
+.profile {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
 .orderBox * {
-  margin: 10px;
   text-align: start;
+  margin: 0.2rem;
 }

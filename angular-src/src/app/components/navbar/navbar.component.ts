@@ -14,6 +14,18 @@ export class NavbarComponent {
     private router:Router,
     private flashMessageService:FlashMessagesService
     ) { }
+    navbarToggle:any;
+    ngOnInit() {
+      this.navbarToggle = document.getElementById('navbarResponsive');
+    }
+
+    @HostListener('document:click', ['$event'])
+    documentClick(event: MouseEvent) {
+      console.log(this.navbarToggle);
+      if (this.navbarToggle?.classList.contains('show')) {
+        this.navbarToggle.classList.remove('show');
+      }
+    }
     
 
     onLogoutClick() {

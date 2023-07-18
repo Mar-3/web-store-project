@@ -39,7 +39,6 @@ router.post('/authenticate', (req, res, next) => {
                     expiresIn: 604800
                   });
           
-
                 res.json({
                     success: true,
                     token: 'JWT '+token,
@@ -56,7 +55,6 @@ router.post('/authenticate', (req, res, next) => {
             }
         });
     });
-
 });
 
 module.exports = router;

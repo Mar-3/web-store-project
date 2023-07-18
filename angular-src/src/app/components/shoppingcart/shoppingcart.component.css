@@ -1,0 +1,24 @@
+table {
+  width: 90vw;
+  table-layout: fixed;
+
+}
+tr {
+  border-bottom: 0.5px;
+  border-style: solid;
+  border-color: black;
+}
+td {
+  border: 0.1px;
+  border-style: solid;
+  border-color: grey;
+}
+input {
+  font-size: 16px;
+  width: 100px;
+}
+
+.container-flex {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}

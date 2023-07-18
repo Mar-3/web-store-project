@@ -1,5 +1,5 @@
-<h2>Order:</h2>
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <h2>Order:</h2>
   <br>
   <label for="Address">Address:</label><br>
   <input name="Address" ngModel required #address="ngModel"><br><br>
@@ -27,5 +27,5 @@
     </div>
     <h5>Total: {{ totalPrice.toFixed(2) }}€</h5>
   </div>
-  <button>Order</button>
+  <button class="btn btn-primary rounded-pill">Order</button>
 </form>

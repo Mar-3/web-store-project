@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FlashMessagesService } from './flashmessages.service';
-import { ObjectExpression } from 'mongoose';
 import { AuthService } from './auth.service';
+import { Observable, of } from 'rxjs';
 
 class Product {
   _id:string | undefined;
@@ -22,7 +22,8 @@ export class ProductService {
   constructor(
     private http:HttpClient,
     private flashMessageService:FlashMessagesService,
-    private authService:AuthService) { }
+    private authService:AuthService) {
+    }
     
 
   getProductsStorage() {
@@ -31,11 +32,12 @@ export class ProductService {
       .subscribe(
         (data) => {
           localStorage.setItem('products',JSON.stringify(data.body));
+          console.log('producststorage:', localStorage.getItem('products'))
           return JSON.parse(localStorage.getItem('products') || '{}');;
         })
       }
-    else {       
-      return JSON.parse(localStorage.getItem('products') || '{}');;
+    else {
+        return JSON.parse(localStorage.getItem('products') || '{}');
     }
   }
 
@@ -94,9 +96,10 @@ export class ProductService {
     
     // If not found: set quantity to 1 and add to cart
     console.log('cartIndex:', cartIndex)
+    console.log('quantity', quantity)
     if (cartIndex == -1) {
       console.log('new product')
-      newProduct.quantity = 1
+      newProduct.quantity = quantity;
       cartJson.push(newProduct);
     } else {
       // If found: increase quantity
@@ -109,7 +112,7 @@ export class ProductService {
     localStorage.setItem('cart', JSON.stringify(cartJson));
     this.flashMessageService
     .newMessage(
-      'Product '.concat(newProduct.name!,' has been added to your cart!'),'success')
+      quantity + ' ' + newProduct.name!+' has been added to your cart!','success')
     console.log(cartJson);
     }
     
@@ -149,7 +152,7 @@ export class ProductService {
         'Authorization': this.authService.authToken,
       });
       return this.http.post<any>(
-        'http://localhost:8080/orders/new',
+        'https://ultra-ridge-392020.lm.r.appspot.com/orders/new',
         newOrder, 
         {observe: 'response',
         headers:headers},);

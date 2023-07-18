@@ -1,13 +1,9 @@
 import { Component} from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { compileDeclareClassMetadata } from '@angular/compiler';
+import { Observable, shareReplay } from 'rxjs';
 
-const placeholders = JSON.parse(
-  '[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]'
-)
-
+let products:Observable<Array<any>>;
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
@@ -15,16 +11,30 @@ const placeholders = JSON.parse(
 })
 export class StoreComponent {
   
-  products:any = placeholders;
 
   
-
   constructor(
     private productService:ProductService,
     private router:Router) {}
 
+  products:any = new Array;
   ngOnInit() {
-      this.products = this.productService.getProductsStorage();
+    this.getProducts();
+    }
+
+    getProducts() {
+      if (localStorage.getItem('products') === null) {
+      this.productService.getProducts()?.subscribe(data => {
+        localStorage.setItem('products',JSON.stringify(data.body));
+        data.body.forEach((product:any) => {
+          this.products.push(product);
+        })
+      })
+    } else {
+      JSON.parse(localStorage.getItem('products')|| '{}').forEach((product:any) => {
+        this.products.push(product);
+      })
+    }
     }
 
     addToCart(id:string) {

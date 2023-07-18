@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
-import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-profile',
@@ -27,9 +26,11 @@ export class ProfileComponent{
   this.authService.getUserOrders()
   .subscribe(
     (data) => {
+      console.log(' subscrie start')
       const productDb = this.productService.getProductsStorage();
       console.log(productDb);
       this.orders = data.body.orders;
+      console.log('orders',this.orders);
 
       // combining product ids with the database to print 
       // the ordered items
@@ -51,8 +52,7 @@ export class ProfileComponent{
           })
           orders[index].totalPrice = totalPrice;
       })
-    console.log(this.orders);
-    }
-    );
+    console.log('orders',this.orders);
+    });
   }
 }
